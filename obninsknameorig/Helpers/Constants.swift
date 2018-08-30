@@ -28,6 +28,11 @@ class Constants: NSObject {
     static let newsURL: String = "http://obninsk.name/api.php?get=news"
     static let tagsUrl: String = "http://obninsk.name/api.php?get=head"
     static let navBarView: UIImageView = UIImageView(image: #imageLiteral(resourceName: "bar_logo"))
-    
 
+    static let blueBackTag: UIColor = UIColor(named: "blue")!
+    static let blueTextTag: UIColor = UIColor(named: "white")!
+    static let redBackTag: UIColor = UIColor(named: "tagitemredback")!
+    static let redTextTag: UIColor = UIColor(named: "tagitemredtext")!
+    static let grayBackTag: UIColor = UIColor(named: "tagitemgrayback")!
+    static let grayTextTag: UIColor = UIColor(named: "tagitemgraytext")!
 }

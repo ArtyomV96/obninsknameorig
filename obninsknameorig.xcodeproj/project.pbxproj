@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		DFDBB3E82136A48E00FA2AC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDBB3E72136A48E00FA2AC8 /* AppDelegate.swift */; };
-		DFDBB3EA2136A48E00FA2AC8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDBB3E92136A48E00FA2AC8 /* ViewController.swift */; };
 		DFDBB3F02136A48E00FA2AC8 /* obninsknameorig.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DFDBB3EE2136A48E00FA2AC8 /* obninsknameorig.xcdatamodeld */; };
 		DFDBB3F52136A49000FA2AC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFDBB3F32136A49000FA2AC8 /* LaunchScreen.storyboard */; };
 		DFDBB41F2136A61B00FA2AC8 /* SF-Pro-Text-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = DFDBB3FF2136A61A00FA2AC8 /* SF-Pro-Text-Heavy.otf */; };
@@ -37,6 +36,7 @@
 		DFDBB4392136A61B00FA2AC8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDBB41D2136A61B00FA2AC8 /* Constants.swift */; };
 		DFDBB43A2136A61B00FA2AC8 /* ServerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDBB41E2136A61B00FA2AC8 /* ServerRequest.swift */; };
 		DFDBB43C2136A6C500FA2AC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFDBB43B2136A6C500FA2AC8 /* Assets.xcassets */; };
+		DFDBB43F2136B5BB00FA2AC8 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDBB43E2136B5BB00FA2AC8 /* TagCell.swift */; };
 		EB92EE1B765082329082940F /* Pods_obninsknameorig.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DB9D9E67014CBB828792AED /* Pods_obninsknameorig.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +46,6 @@
 		B8348657C4423291CA5C7D0C /* Pods-obninsknameorig.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-obninsknameorig.debug.xcconfig"; path = "Pods/Target Support Files/Pods-obninsknameorig/Pods-obninsknameorig.debug.xcconfig"; sourceTree = "<group>"; };
 		DFDBB3E42136A48E00FA2AC8 /* obninsknameorig.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = obninsknameorig.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFDBB3E72136A48E00FA2AC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DFDBB3E92136A48E00FA2AC8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DFDBB3EF2136A48E00FA2AC8 /* obninsknameorig.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = obninsknameorig.xcdatamodel; sourceTree = "<group>"; };
 		DFDBB3F42136A49000FA2AC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DFDBB3F62136A49000FA2AC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,6 +75,7 @@
 		DFDBB41D2136A61B00FA2AC8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DFDBB41E2136A61B00FA2AC8 /* ServerRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerRequest.swift; sourceTree = "<group>"; };
 		DFDBB43B2136A6C500FA2AC8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../ObninskName/ObninskName/Assets.xcassets; sourceTree = "<group>"; };
+		DFDBB43E2136B5BB00FA2AC8 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,14 +128,13 @@
 		DFDBB3E62136A48E00FA2AC8 /* obninsknameorig */ = {
 			isa = PBXGroup;
 			children = (
+				DFDBB3E72136A48E00FA2AC8 /* AppDelegate.swift */,
 				DFDBB43B2136A6C500FA2AC8 /* Assets.xcassets */,
 				DFDBB4112136A61A00FA2AC8 /* Controllers */,
 				DFDBB40B2136A61A00FA2AC8 /* CustomView */,
 				DFDBB41C2136A61B00FA2AC8 /* Helpers */,
 				DFDBB4182136A61A00FA2AC8 /* Model */,
 				DFDBB3FE2136A61A00FA2AC8 /* Resources */,
-				DFDBB3E72136A48E00FA2AC8 /* AppDelegate.swift */,
-				DFDBB3E92136A48E00FA2AC8 /* ViewController.swift */,
 				DFDBB3F32136A49000FA2AC8 /* LaunchScreen.storyboard */,
 				DFDBB3F62136A49000FA2AC8 /* Info.plist */,
 				DFDBB3EE2136A48E00FA2AC8 /* obninsknameorig.xcdatamodeld */,
@@ -168,6 +167,7 @@
 				DFDBB40D2136A61A00FA2AC8 /* MainNewsView.swift */,
 				DFDBB40F2136A61A00FA2AC8 /* NewsViewCell.swift */,
 				DFDBB4102136A61A00FA2AC8 /* BottomDatePicker.swift */,
+				DFDBB43E2136B5BB00FA2AC8 /* TagCell.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -336,9 +336,9 @@
 			files = (
 				DFDBB4392136A61B00FA2AC8 /* Constants.swift in Sources */,
 				DFDBB4332136A61B00FA2AC8 /* NavigationController.swift in Sources */,
-				DFDBB3EA2136A48E00FA2AC8 /* ViewController.swift in Sources */,
 				DFDBB42F2136A61B00FA2AC8 /* BottomDatePicker.swift in Sources */,
 				DFDBB4342136A61B00FA2AC8 /* NoticeController.swift in Sources */,
+				DFDBB43F2136B5BB00FA2AC8 /* TagCell.swift in Sources */,
 				DFDBB43A2136A61B00FA2AC8 /* ServerRequest.swift in Sources */,
 				DFDBB4322136A61B00FA2AC8 /* NewsTableController.swift in Sources */,
 				DFDBB4302136A61B00FA2AC8 /* SingleNewsController.swift in Sources */,
@@ -487,6 +487,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PQJD9TZQSB;
 				INFOPLIST_FILE = obninsknameorig/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -495,7 +496,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pro.midev.obninsknameorig;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -505,6 +506,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PQJD9TZQSB;
 				INFOPLIST_FILE = obninsknameorig/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -513,7 +515,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pro.midev.obninsknameorig;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

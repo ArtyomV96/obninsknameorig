@@ -22,6 +22,7 @@ class NewsTableController: UITableViewController {
     
     override func viewDidLoad() {
         getNews()
+        getTags()
         super.viewDidLoad()
         setupTableView()
     }
@@ -38,7 +39,7 @@ class NewsTableController: UITableViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 104
         self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedSectionHeaderHeight = 250;
+        self.tableView.estimatedSectionHeaderHeight = 306;
         self.tableView.reloadData()
     }
     
@@ -85,7 +86,28 @@ class NewsTableController: UITableViewController {
             print(self.news.count)
             self.tableView.reloadData()
         })
-        
+    }
+
+    func getTags() {
+        guard URL(string: "\(Constants.tagsUrl)") != nil else { return }
+        Alamofire.request("\(Constants.tagsUrl)").responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                //print(json)
+                for item in json.arrayValue {
+                    print(item)
+                    if item != JSON.null {
+                        let tags = TagsModel(tagID: item["tagID"].stringValue, tag: item["tag"].stringValue)
+                        self.headerView.tags.append(tags)
+                    }
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+           // print(self.headerView.tags.count)
+            self.headerView.collectionView.reloadData()
+    })
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

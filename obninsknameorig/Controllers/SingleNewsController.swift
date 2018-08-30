@@ -17,7 +17,7 @@ class SingleNewsController: UIViewController {
         var view = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
         //view.contentSize.width = UIScreen.main.bounds.width
-        view.contentSize.height = 2000
+        view.contentSize.height = 1500
         view.autoresizingMask = UIViewAutoresizing.flexibleHeight
         view.backgroundColor = UIColor.white
         return view
@@ -107,7 +107,7 @@ class SingleNewsController: UIViewController {
         view.contentMode = .scaleAspectFit
         view.tintColor = Constants.tintColorGray
         return view
-    }()
+    }()   
 
     var dislikes: UILabel = {
         var view = UILabel()
@@ -161,6 +161,7 @@ class SingleNewsController: UIViewController {
         addViews()
         setupConstraints()
         addContent()
+        print("contentvdl = \(self.scrollView.frame.height)")
     }
     
     func addViews() {
@@ -271,6 +272,8 @@ class SingleNewsController: UIViewController {
         dislikes.text = news.minus
         authorName.text = news.author
         viewers.text = news.reviewCount
+
+        print("content = \(self.scrollView.frame.height)")
     }
     
     @objc func btnBackClicked() {

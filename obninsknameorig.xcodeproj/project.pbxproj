@@ -37,6 +37,8 @@
 		DFDBB43A2136A61B00FA2AC8 /* ServerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDBB41E2136A61B00FA2AC8 /* ServerRequest.swift */; };
 		DFDBB43C2136A6C500FA2AC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFDBB43B2136A6C500FA2AC8 /* Assets.xcassets */; };
 		DFDBB43F2136B5BB00FA2AC8 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDBB43E2136B5BB00FA2AC8 /* TagCell.swift */; };
+		DFFB90D721381DD900618427 /* CategoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFB90D621381DD900618427 /* CategoriesController.swift */; };
+		DFFB90D9213823A500618427 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFB90D8213823A500618427 /* CategoryCell.swift */; };
 		EB92EE1B765082329082940F /* Pods_obninsknameorig.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DB9D9E67014CBB828792AED /* Pods_obninsknameorig.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +78,8 @@
 		DFDBB41E2136A61B00FA2AC8 /* ServerRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerRequest.swift; sourceTree = "<group>"; };
 		DFDBB43B2136A6C500FA2AC8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../ObninskName/ObninskName/Assets.xcassets; sourceTree = "<group>"; };
 		DFDBB43E2136B5BB00FA2AC8 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
+		DFFB90D621381DD900618427 /* CategoriesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesController.swift; sourceTree = "<group>"; };
+		DFFB90D8213823A500618427 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +172,7 @@
 				DFDBB40F2136A61A00FA2AC8 /* NewsViewCell.swift */,
 				DFDBB4102136A61A00FA2AC8 /* BottomDatePicker.swift */,
 				DFDBB43E2136B5BB00FA2AC8 /* TagCell.swift */,
+				DFFB90D8213823A500618427 /* CategoryCell.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 				DFDBB4152136A61A00FA2AC8 /* NavigationController.swift */,
 				DFDBB4162136A61A00FA2AC8 /* NoticeController.swift */,
 				DFDBB4172136A61A00FA2AC8 /* TabBarController.swift */,
+				DFFB90D621381DD900618427 /* CategoriesController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -339,6 +345,8 @@
 				DFDBB42F2136A61B00FA2AC8 /* BottomDatePicker.swift in Sources */,
 				DFDBB4342136A61B00FA2AC8 /* NoticeController.swift in Sources */,
 				DFDBB43F2136B5BB00FA2AC8 /* TagCell.swift in Sources */,
+				DFFB90D9213823A500618427 /* CategoryCell.swift in Sources */,
+				DFFB90D721381DD900618427 /* CategoriesController.swift in Sources */,
 				DFDBB43A2136A61B00FA2AC8 /* ServerRequest.swift in Sources */,
 				DFDBB4322136A61B00FA2AC8 /* NewsTableController.swift in Sources */,
 				DFDBB4302136A61B00FA2AC8 /* SingleNewsController.swift in Sources */,

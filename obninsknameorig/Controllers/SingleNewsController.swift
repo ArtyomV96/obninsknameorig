@@ -34,6 +34,7 @@ class SingleNewsController: UIViewController {
     var postImage: UIImageView = {
         var view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = true
         view.contentMode = .scaleAspectFill
         return view
     }()

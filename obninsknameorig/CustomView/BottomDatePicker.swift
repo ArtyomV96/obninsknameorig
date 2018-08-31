@@ -58,7 +58,7 @@ class BottomDatePicker: UIView {
         view.titleLabel?.font = UIFont(name: Constants.SFMedium, size: 17)
         view.setTitle("Показать новости", for: .normal)
         view.addTarget(self, action: #selector(selectButton), for: .touchUpInside)
-        view.tag = 1
+        view.tag = 2
         return view
     }()
     
@@ -93,7 +93,7 @@ class BottomDatePicker: UIView {
         datePicker.datePickerMode = UIDatePickerMode.date
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd"
-        let selectedDate = dateFormatter.string(from: datePicker.date)
+      //  let selectedDate = dateFormatter.string(from: datePicker.date)
         self.viewWithTag(21)?.removeFromSuperview()
         
         //print(selectedDate)

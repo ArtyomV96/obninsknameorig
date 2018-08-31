@@ -19,14 +19,22 @@ class NewsTableController: UITableViewController {
     var server = ServerRequest()
     var skip = 0
     var limit = 20
-    
+    var dp: BottomDatePicker?
     override func viewDidLoad() {
-        getNews()
-        getTags()
+        getNews(url: "\(Constants.newsURL)&limit=\(limit)&skip=\(skip)")
+        //getTags()
+        self.headerView.collectionView.reloadData()
         super.viewDidLoad()
         setupTableView()
+        self.headerView.toCatsButton.addTarget(self, action: #selector(openCats), for: .touchUpInside)
     }
-    
+
+    @objc func openCats() {
+        let categoryVC = CategoriesController()
+        let category = UINavigationController(rootViewController: categoryVC)
+        self.showDetailViewController(category, sender: nil)
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         print("didappear")
     }
@@ -42,14 +50,24 @@ class NewsTableController: UITableViewController {
         self.tableView.estimatedSectionHeaderHeight = 306;
         self.tableView.reloadData()
     }
-    
+
     @objc func btnCalendarClicked() {
-        print("tap")
         let datePicker = BottomDatePicker()
-    
-        
+        datePicker.showNewsButton.addTarget(self, action: #selector(selectButton), for: .touchUpInside)
         let window = UIApplication.shared.keyWindow
         window?.addSubview(datePicker)
+        self.dp = datePicker
+    }
+
+    @objc func selectButton() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.dp?.alpha = 0
+        })
+        self.dp?.datePicker.datePickerMode = UIDatePickerMode.date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd"
+        let selectedDate = dateFormatter.string(from: (self.dp?.datePicker.date)!)
+        print(selectedDate)
     }
     
     func toDayNews(selectedDate: String) {
@@ -60,9 +78,9 @@ class NewsTableController: UITableViewController {
     }
     
     
-    func getNews() {
-        guard URL(string: "\(Constants.newsURL)&limit=\(limit)&skip=\(skip)") != nil else { return }
-        Alamofire.request("\(Constants.newsURL)&limit=\(limit)&skip=\(skip)").responseJSON(completionHandler: { (response) in
+    func getNews(url: String) {
+        guard URL(string: url) != nil else { return }
+        Alamofire.request(url).responseJSON(completionHandler: { (response) in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
@@ -88,32 +106,11 @@ class NewsTableController: UITableViewController {
         })
     }
 
-    func getTags() {
-        guard URL(string: "\(Constants.tagsUrl)") != nil else { return }
-        Alamofire.request("\(Constants.tagsUrl)").responseJSON(completionHandler: { (response) in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                //print(json)
-                for item in json.arrayValue {
-                    print(item)
-                    if item != JSON.null {
-                        let tags = TagsModel(tagID: item["tagID"].stringValue, tag: item["tag"].stringValue)
-                        self.headerView.tags.append(tags)
-                    }
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-           // print(self.headerView.tags.count)
-            self.headerView.collectionView.reloadData()
-    })
-    }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row  == news.count - 2{   // when scrolling down, if our limit meets index path run
             skip = skip + 20               // adds '5' to skip
-            getNews()         // runs above method
+            getNews(url: "\(Constants.newsURL)&limit=\(limit)&skip=\(skip)")         // runs above method
         }
     }
 
@@ -164,7 +161,7 @@ class NewsTableController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let action = UITapGestureRecognizer(target: self, action:  #selector (self.headerAction(_:)))
-        view.addGestureRecognizer(action)
+        headerView.clickableView.addGestureRecognizer(action)
     }
     
     @objc func headerAction(_ sender:UITapGestureRecognizer){

@@ -18,13 +18,29 @@ class MainNewsView: UIView {
         layout.scrollDirection = .horizontal
         layout.estimatedItemSize = CGSize(width: cll.tagView.frame.width, height: 36)
         layout.minimumLineSpacing = 8
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
         var view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.showsHorizontalScrollIndicator = false
         return view
     }()
 
+    var toCatsButton: UIButton = {
+        let view: UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 22))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.setTitleColor(Constants.colorBlue, for: .normal)
+        view.setTitle("Рубрики>", for: .normal)
+        view.titleLabel?.font = UIFont(name: Constants.SFMedium, size: 15)
+        view.tag = 1
+        return view
+    }()
+
+    var clickableView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = Constants.colorWhite
+        return view
+    }()
     
     var postImage: UIImageView = {
         var view = UIImageView()
@@ -65,7 +81,7 @@ class MainNewsView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        tags.append(TagsModel(tagID: "0001", tag: "Свежее"))
+        tags.append(TagsModel(tagID: "0001", tag: "Все новости"))
         tags.append(TagsModel(tagID: "0002", tag: "Важное"))
         self.backgroundColor = Constants.colorWhite
         self.collectionView.backgroundColor = .white
@@ -79,10 +95,12 @@ class MainNewsView: UIView {
     
     func addViews() {
         self.addSubview(collectionView)
-        self.addSubview(postImage)
-        self.addSubview(title)
-        self.addSubview(subTitle)
-        self.addSubview(time)
+        self.addSubview(clickableView)
+        self.addSubview(toCatsButton)
+        self.clickableView.addSubview(postImage)
+        self.clickableView.addSubview(title)
+        self.clickableView.addSubview(subTitle)
+        self.clickableView.addSubview(time)
     }
     
     func setupConstraints() {
@@ -93,10 +111,18 @@ class MainNewsView: UIView {
         collectionView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         collectionView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
 
-        postImage.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        postImage.topAnchor.constraint(equalTo: self.collectionView.bottomAnchor).isActive = true
-        postImage.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
-        postImage.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
+        toCatsButton.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor).isActive = true
+        toCatsButton.rightAnchor.constraint(equalTo: collectionView.rightAnchor, constant: -8).isActive = true
+
+        clickableView.topAnchor.constraint(equalTo: self.collectionView.bottomAnchor).isActive = true
+        clickableView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        clickableView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        clickableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+
+        postImage.centerXAnchor.constraint(equalTo: self.clickableView.centerXAnchor).isActive = true
+        postImage.topAnchor.constraint(equalTo: self.clickableView.topAnchor).isActive = true
+        postImage.rightAnchor.constraint(equalTo: self.clickableView.rightAnchor, constant: -16).isActive = true
+        postImage.leftAnchor.constraint(equalTo: self.clickableView.leftAnchor, constant: 16).isActive = true
         postImage.heightAnchor.constraint(equalToConstant: screenWidth/2).isActive = true
         postImage.widthAnchor.constraint(equalToConstant: screenWidth).isActive = true
         
@@ -110,7 +136,7 @@ class MainNewsView: UIView {
         
         time.topAnchor.constraint(equalTo: self.subTitle.bottomAnchor, constant: 8).isActive = true
         time.leftAnchor.constraint(equalTo: self.subTitle.leftAnchor).isActive = true
-        time.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16).isActive = true
+        time.bottomAnchor.constraint(equalTo: self.clickableView.bottomAnchor, constant: -16).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -122,18 +148,32 @@ extension MainNewsView: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tags.count
     }
-
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! TagCell
         cell.tagView.text = tags[indexPath.row].tag
         switch indexPath.row {
-        case 0:
-            cell.setColors(back: Constants.blueBackTag, text: Constants.blueTextTag)
-        case 1:
-            cell.setColors(back: Constants.redBackTag, text: Constants.redTextTag)
-        default:
-            cell.setColors(back: Constants.grayBackTag, text: Constants.grayTextTag)
+            case 0:
+                cell.setColors(back: Constants.blueBackTag, text: Constants.blueTextTag)
+            case 1:
+                cell.setColors(back: Constants.redBackTag, text: Constants.redTextTag)
+            default:
+                cell.setColors(back: Constants.grayBackTag, text: Constants.grayTextTag)
         }
         return cell
+    }
+
+
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(tags[indexPath.row])
+//        NewsTableController.skip = 0
+//        switch indexPath.row {
+//        case 0:
+//            self.ntc.getNews(url: "\(Constants.newsURL)&limit=\(self.ntc.limit)&skip=\(self.ntc.skip)&show=hot")
+//        case 1:
+//            self.ntc.getNews(url: "\(Constants.newsURL)&limit=\(self.ntc.limit)&skip=\(self.ntc.skip)")
+//        default:
+//            self.ntc.getNews(url: "\(Constants.newsURL)&limit=\(self.ntc.limit)&skip=\(self.ntc.skip)&tagID=\(String(describing: self.tags[indexPath.row].tagID))")
+//        }
     }
 }

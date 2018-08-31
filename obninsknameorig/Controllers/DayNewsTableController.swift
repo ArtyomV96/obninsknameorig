@@ -7,34 +7,63 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class DayNewsTableController: UITableViewController {
     
     var news: [NewsModel] = []
     var server = ServerRequest()
     var date: String?
+    var skip = 0
+    var limit = 20
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getNews()
+        getNews(url: "\(Constants.newsURL)&limit=\(limit)&skip=\(skip)&date=\(date!)")
+        print("\(Constants.newsURL)&limit=\(limit)&skip=\(skip)&date=\(date!))")
         setupTableView()
-        print(date)
     }
     
     func setupTableView() {
-        
+        self.navigationItem.title = date!
+        self.tableView.register(NewsViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 104
+        self.tableView.reloadData()
     }
     
-    func getNews() {
-        
+    func getNews(url: String) {
+        guard URL(string: url) != nil else { return }
+        Alamofire.request(url).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                //print(json)
+                for item in json.arrayValue {
+                    print(item)
+                    if item != JSON.null {
+                        if !item["image"].isEmpty {
+                            var images = item["image"].arrayValue[0]
+                            let singleNews = NewsModel(id: item["id"].stringValue, date: item["date"].doubleValue, text: item["text"].stringValue, author: item["author"].stringValue,
+                                                       tag: item["tag"].stringValue, title: item["title"].stringValue, images: Images(small: images["small"].stringValue, original: images["original"].stringValue), plus: item["plus"].stringValue, minus: item["minus"].stringValue, reviewCount: item["review_count"].stringValue)
+                            self.news.append(singleNews)
+                        }
+                    } else {
+                        print("nil")
+                    }
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+            print(self.news.count)
+            self.tableView.reloadData()
+        })
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -44,59 +73,28 @@ class DayNewsTableController: UITableViewController {
         return news.count
     }
 
-    /*
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+        let singleNewsController = SingleNewsController()
+        let singleNews = UINavigationController(rootViewController: singleNewsController)
+        singleNewsController.news = news[indexPath.row + 1]
+        present(singleNews, animated: true, completion: nil)
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row  == news.count - 2{   // when scrolling down, if our limit meets index path run
+            skip = skip + 20               // adds '5' to skip
+            getNews(url: "\(Constants.newsURL)&limit=\(limit)&skip=\(skip)&date=\(String(describing: date))")         // runs above method
+        }
+    }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! NewsViewCell
+        let singleNews = news[indexPath.row]
+        cell.title.text = singleNews.title
+        cell.time.text = server.dateDef(post: Date(timeIntervalSince1970: singleNews.date!))
+        server.getImage(img: singleNews.images?.small, view: cell.postImage)
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

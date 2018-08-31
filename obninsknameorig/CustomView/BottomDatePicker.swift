@@ -57,7 +57,6 @@ class BottomDatePicker: UIView {
         view.setTitleColor(Constants.colorBlue, for: .normal)
         view.titleLabel?.font = UIFont(name: Constants.SFMedium, size: 17)
         view.setTitle("Показать новости", for: .normal)
-        view.addTarget(self, action: #selector(selectButton), for: .touchUpInside)
         view.tag = 2
         return view
     }()
@@ -65,8 +64,8 @@ class BottomDatePicker: UIView {
     func addViews() {
         if UIApplication.shared.keyWindow != nil {
             self.backgroundColor = UIColor(white: 0, alpha: 0)
-            //self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.pickerDismiss)))
-            self.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 260, width: UIScreen.main.bounds.width, height: 260)
+            self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.pickerDismiss)))
+            self.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             self.addSubview(container)
             container.addSubview(cancelButton)
             container.addSubview(showNewsButton)
@@ -86,19 +85,7 @@ class BottomDatePicker: UIView {
                 })
     }
     let parentViewController = NewsTableController()
-    @objc func selectButton() {
-//        UIView.animate(withDuration: 0.5, animations: {
-//            self.alpha = 0
-//        })
-        datePicker.datePickerMode = UIDatePickerMode.date
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy/MM/dd"
-      //  let selectedDate = dateFormatter.string(from: datePicker.date)
-        self.viewWithTag(21)?.removeFromSuperview()
-        
-        //print(selectedDate)
-    }
-    
+
     func setupConstraint() {
         container.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         container.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true

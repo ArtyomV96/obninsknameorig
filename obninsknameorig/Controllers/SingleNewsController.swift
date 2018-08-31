@@ -301,7 +301,6 @@ extension SingleNewsController: UIScrollViewDelegate {
             bar?.tintColor = UIColor(hue: 213/360, saturation: 82/100*offset, brightness: 1 - 0.36*offset, alpha: 1)
             bar?.backgroundColor = color
             UIApplication.shared.statusBarView?.backgroundColor = color
-            
         }
     }
 }

@@ -16,8 +16,6 @@ class CategoriesController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        categories.append(TagsModel(tagID: "01", tag: "Все новости"))
-        categories.append(TagsModel(tagID: "02", tag: "Свежее"))
         getTags()
         self.navigationItem.title = Constants.newsTitle
         let bar = self.navigationController?.navigationBar
@@ -41,6 +39,8 @@ class CategoriesController: UITableViewController {
         Alamofire.request("\(Constants.tagsUrl)").responseJSON(completionHandler: { (response) in
             switch response.result {
             case .success(let value):
+                self.categories.append(TagsModel(tagID: "01", tag: "Все новости"))
+                self.categories.append(TagsModel(tagID: "02", tag: "Свежее"))
                 let json = JSON(value)
                 //print(json)
                 for item in json.arrayValue {

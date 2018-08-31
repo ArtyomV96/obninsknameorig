@@ -67,14 +67,14 @@ class NewsTableController: UITableViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd"
         let selectedDate = dateFormatter.string(from: (self.dp?.datePicker.date)!)
-        print(selectedDate)
+        let dayNews = DayNewsTableController()
+        dayNews.date = selectedDate
+        let newsVC = NavigationController(rootViewController: dayNews)
+        present(newsVC, animated: true, completion: nil)
     }
     
     func toDayNews(selectedDate: String) {
-        let dayNews = DayNewsTableController()
-        let newsVC = NavigationController(rootViewController: dayNews)
-     //   showDetailViewController(day, sender: <#T##Any?#>)
-        present(newsVC, animated: true, completion: nil)
+
     }
     
     

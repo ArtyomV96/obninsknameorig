@@ -134,8 +134,8 @@
 			children = (
 				DFDBB3E72136A48E00FA2AC8 /* AppDelegate.swift */,
 				DFDBB43B2136A6C500FA2AC8 /* Assets.xcassets */,
-				DFDBB4112136A61A00FA2AC8 /* Controllers */,
 				DFDBB40B2136A61A00FA2AC8 /* CustomView */,
+				DFDBB4112136A61A00FA2AC8 /* Controllers */,
 				DFDBB41C2136A61B00FA2AC8 /* Helpers */,
 				DFDBB4182136A61A00FA2AC8 /* Model */,
 				DFDBB3FE2136A61A00FA2AC8 /* Resources */,
@@ -181,9 +181,9 @@
 			isa = PBXGroup;
 			children = (
 				DFDBB4122136A61A00FA2AC8 /* SingleNewsController.swift */,
+				DFDBB4152136A61A00FA2AC8 /* NavigationController.swift */,
 				DFDBB4132136A61A00FA2AC8 /* DayNewsTableController.swift */,
 				DFDBB4142136A61A00FA2AC8 /* NewsTableController.swift */,
-				DFDBB4152136A61A00FA2AC8 /* NavigationController.swift */,
 				DFDBB4162136A61A00FA2AC8 /* NoticeController.swift */,
 				DFDBB4172136A61A00FA2AC8 /* TabBarController.swift */,
 				DFFB90D621381DD900618427 /* CategoriesController.swift */,
